@@ -3,7 +3,7 @@ const { Sequelize } = require('sequelize');
 // Load the DB path from environment variables
 const sequelize = new Sequelize({
   dialect: 'sqlite',
-  storage: process.env.DB_PATH || './db/database.sqlite',  // Use .env variable or default
+  storage: process.env.DB_PATH || './db/database.sqlite',  
 });
 
 // Test the database connection
