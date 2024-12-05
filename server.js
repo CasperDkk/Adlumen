@@ -5,6 +5,8 @@ const paymentRoutes = require('./routes/paymentRoutes');
 const { connectDB } = require('./config/db-config');
 const logger = require('./utils/logger'); 
 
+require('dotenv').config();
+
 const app = express();
 
 // Middleware

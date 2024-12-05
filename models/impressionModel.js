@@ -1,5 +1,5 @@
-const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/db-config');
+const { DataTypes } = require('sequelize');
+const sequelize = require('../config/db-config'); // Use the sequelize instance from db-config.js
 
 const Impression = sequelize.define('Impression', {
   adId: {
