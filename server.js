@@ -1,7 +1,9 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const adRoutes = require('./routes/adRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const { connectDB } = require('./config/db-config');
+const logger = require ('./utils/logger')
 
 const app = express();
 
