@@ -52,7 +52,7 @@ async function settleLightningInvoice(id) {
 }
 
 module.exports = {
-  fetchWalletInfo,  // Export the renamed function
+  fetchWalletInfo,  
   createLightningInvoice,
   checkInvoiceStatus,
   settleLightningInvoice,

@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const adRoutes = require('./routes/adRoutes');
 const paymentRoutes = require('./routes/paymentRoutes');
 const logger = require('./utils/logger'); 
-const { getWalletInfo } = require('./services/lightningService');
+const { fetchWalletInfo } = require('./services/lightningService');
 
 require('dotenv').config();
 
@@ -20,7 +20,7 @@ app.use('/api/payments', paymentRoutes);
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, async () => {
   try {
-    await getWalletInfo(); // Test the Lightning Network connection
+    await fetchWalletInfo(); // Test the Lightning Network connection
     logger.info(`Server running on http://localhost:${PORT}`); 
   } catch (error) {
     logger.error('Error connecting to the Lightning node:', error);
