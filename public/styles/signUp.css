@@ -1,0 +1,56 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0; /* Light background for contrast */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+}
+
+.form-container {
+    background: rgba(255, 255, 255, 0.1); /* Glassmorphism effect */
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px); /* Blur effect for glassmorphism */
+    width: 300px; /* Fixed width for forms */
+}
+
+h1 {
+    text-align: center;
+}
+
+input {
+    width: calc(100% - 20px); 
+    padding: 10px;
+    margin: 10px 0; 
+    border-radius: 5px;
+    border: none; 
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    border-radius: 5px;
+    border: none; /* Remove default border */
+    background-color: #4CAF50; /* Green background */
+    color: white;
+    font-size: 16px;
+}
+
+button:hover {
+    background-color: #45a049; 
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        width: 90%; 
+        padding: 20px; 
+    }
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard - AdLumen</title>
+    <link rel="stylesheet" href="dash.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script> <!-- Chart.js for graphs -->
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AdLumen Dashboard</h1>
+            <button id="themeToggle">Switch to Dark Theme</button>
+        </header>
+
+        <div class="user-profile">
+            <h2>User Profile</h2>
+            <p>Name: John Doe</p>
+            <p>Email: john.doe@example.com</p>
+            <div class="settings-bar">
+                <button>Settings</button>
+                <button>Logout</button>
+            </div>
+        </div>
+
+        <section class="tables-section">
+            <h2>User Data</h2>
+            <table id="userDataTable">
+                <thead>
+                    <tr>
+                        <th>User ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Earnings (%)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>Jane Smith</td>
+                        <td>jane.smith@example.com</td>
+                        <td>75%</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>Mike Johnson</td>
+                        <td>mike.johnson@example.com</td>
+                        <td>60%</td>
+                    </tr>
+                
+                </tbody>
+            </table>
+
+            <h2>Impressions Overview</h2>
+            <canvas id="impressionChart"></canvas>
+
+            <!-- Impression Table -->
+            <table id="impressionTable">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Impressions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>2024-01-01</td><td>1000</td></tr>
+                    <tr><td>2024-01-02</td><td>1500</td></tr>
+                
+                </tbody>
+            </table>
+
+        </section>
+
+    </div>
+
+    <script src="/public/js/dash.js"></script> 
+</body>
+</html>
