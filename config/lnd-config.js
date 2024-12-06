@@ -1,15 +1,15 @@
+// lnd-config.js
 const { authenticatedLndGrpc } = require('ln-service');
-const fs = require('fs');
-const path = require('path');
 
-const cert = fs.readFileSync(path.join(__dirname, 'path/to/tls.cert'));
-const macaroon = fs.readFileSync(path.join(__dirname, 'path/to/admin.macaroon')).toString('hex');
+// Lightning Network Node Configuration
+const config = {
+  socket: process.env.LND_SOCKET || '127.0.0.1:10004', // The gRPC server address of your Polar node
+  macaroon: process.env.LND_MACAROON || './path_to_macaroon_file', // Path to admin macaroon
+  cert: process.env.LND_CERT || './path_to_tls_certificate', // Path to TLS certificate
+};
 
-const lnd = authenticatedLndGrpc({
-  cert: cert.toString(),
-  macaroon,
-  socket: '127.0.0.1:10009', // Node's IP and port
-  server_name: 'localhost', // Match your node's hostname
-}).lnd;
+// Create an authenticated LND instance
+const { lnd } = authenticatedLndGrpc(config);
 
 module.exports = lnd;
+
