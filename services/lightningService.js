@@ -1,10 +1,10 @@
-const lnd = require('../config/lnd-config');
-const { createInvoice, getInvoice, settleInvoice, getWalletInfo } = require('ln-service');  // Methods from ln-service
+const lnd = require('../config/lnd-config');  // Import the lnd config
+const { createInvoice, getInvoice, settleInvoice } = require('ln-service');  // Methods from ln-service
 
 // Fetch wallet info to check the connection
-async function getWalletInfo() {
+async function fetchWalletInfo() {  // Renamed function to avoid conflict
   try {
-    const walletInfo = await lnd.getWalletInfo();
+    const walletInfo = await lnd.getWalletInfo();  // Use lnd to fetch wallet info
     console.log('Connected to Polar Lightning Node', walletInfo);
     return walletInfo;
   } catch (error) {
@@ -52,7 +52,7 @@ async function settleLightningInvoice(id) {
 }
 
 module.exports = {
-  getWalletInfo,
+  fetchWalletInfo,  // Export the renamed function
   createLightningInvoice,
   checkInvoiceStatus,
   settleLightningInvoice,
