@@ -3,6 +3,7 @@
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "ln-service": "^57.22.2",
+    "mysql2": "^3.11.5",
     "sequelize": "^6.37.5",
     "sqlite3": "^5.1.7",
     "winston": "^3.17.0"

@@ -1,49 +1,22 @@
-//db schema for ads
+// models/adModel.js (simplified version)
+let ads = [];
 
-const db = require('../config/db-config');
+const createAd = (adId, advertiser) => {
+  const ad = { adId, advertiser, impressions: 0 };
+  ads.push(ad);
+  return ad;
+};
 
-// Create Ads Table
-db.run(`
-  CREATE TABLE IF NOT EXISTS ads (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    adId TEXT UNIQUE,
-    advertiser TEXT,
-    impressions INTEGER DEFAULT 0,
-    createdAt TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-  )
-`);
+const trackImpression = (adId) => {
+  const ad = ads.find(a => a.adId === adId);
+  if (ad) {
+    ad.impressions += 1;
+  }
+  return ad;
+};
 
-// Function to create a new ad
-async function createAd(adId, advertiser) {
-  const query = `INSERT INTO ads (adId, advertiser) VALUES (?, ?)`;
-  return new Promise((resolve, reject) => {
-    db.run(query, [adId, advertiser], function (err) {
-      if (err) reject(err);
-      resolve({ id: this.lastID });
-    });
-  });
-}
-
-// Function to track an impression
-async function trackImpression(adId) {
-  const query = `UPDATE ads SET impressions = impressions + 1 WHERE adId = ?`;
-  return new Promise((resolve, reject) => {
-    db.run(query, [adId], function (err) {
-      if (err) reject(err);
-      resolve({ changes: this.changes });
-    });
-  });
-}
-
-// Get ad by ID
-async function getAd(adId) {
-  const query = `SELECT * FROM ads WHERE adId = ?`;
-  return new Promise((resolve, reject) => {
-    db.get(query, [adId], (err, row) => {
-      if (err) reject(err);
-      resolve(row);
-    });
-  });
-}
+const getAd = (adId) => {
+  return ads.find(a => a.adId === adId);
+};
 
 module.exports = { createAd, trackImpression, getAd };
