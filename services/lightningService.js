@@ -1,11 +1,11 @@
-const lnd = require('../config/lnd-config');  // Import the lnd config
-const { createInvoice, getInvoice, settleInvoice } = require('ln-service');  // Methods from ln-service
+const lnd = require('../config/lnd-config'); // Import the lnd config
+const { getWalletInfo, createInvoice, getInvoice, settleInvoice } = require('ln-service'); // Import methods from ln-service
 
 // Fetch wallet info to check the connection
-async function fetchWalletInfo() {  // Renamed function to avoid conflict
+async function fetchWalletInfo() {
   try {
-    const walletInfo = await lnd.getWalletInfo();  // Use lnd to fetch wallet info
-    console.log('Connected to Polar Lightning Node', walletInfo);
+    const walletInfo = await getWalletInfo({ lnd }); // Pass the lnd object as an argument
+    console.log('Connected to Polar Lightning Node:', walletInfo);
     return walletInfo;
   } catch (error) {
     console.error('Error connecting to Lightning node:', error);
@@ -18,8 +18,8 @@ async function createLightningInvoice(amount, description) {
   try {
     const { request, id } = await createInvoice({
       lnd,
-      tokens: amount,  // Amount in satoshis
-      description,     // Invoice description
+      tokens: amount, // Amount in satoshis
+      description, // Invoice description
     });
     console.log(`Invoice created: ${request}`);
     return { request, id };
@@ -33,7 +33,7 @@ async function createLightningInvoice(amount, description) {
 async function checkInvoiceStatus(id) {
   try {
     const invoice = await getInvoice({ lnd, id });
-    return invoice.is_confirmed;  // Returns true if paid, else false
+    return invoice.is_confirmed; // Returns true if paid, else false
   } catch (error) {
     console.error(`Error fetching invoice: ${error.message}`);
     throw error;
@@ -52,9 +52,8 @@ async function settleLightningInvoice(id) {
 }
 
 module.exports = {
-  fetchWalletInfo,  
+  fetchWalletInfo, // Correctly export the function
   createLightningInvoice,
   checkInvoiceStatus,
   settleLightningInvoice,
 };
-
