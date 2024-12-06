@@ -1,6 +1,6 @@
 //db schema for ads
 
-const db = require('./database');
+const db = require('../config/db-config');
 
 // Create Ads Table
 db.run(`

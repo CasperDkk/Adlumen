@@ -1,20 +1,15 @@
-const { Sequelize } = require('sequelize');
+const sqlite3 = require('sqlite3').verbose();
 
-// Load the DB path from environment variables
-const sequelize = new Sequelize({
-  dialect: 'sqlite',
-  storage: process.env.DB_PATH || './db/database.sqlite',  
-});
-
-// Test the database connection
-const connectDB = async () => {
-  try {
-    await sequelize.authenticate();  // Test connection to DB
-    console.log('Database connected successfully.');
-  } catch (error) {
-    console.error('Unable to connect to the database:', error.message);
-    process.exit(1);  // Exit the process if DB connection fails
-  }
+const connectDB = () => {
+  const dbPath = process.env.DB_PATH || './db/database.sqlite';
+  const db = new sqlite3.Database(dbPath, (err) => {
+    if (err) {
+      console.error('Error opening database:', err.message);
+    } else {
+      console.log('Connected to the SQLite database.');
+    }
+  });
+  return db;
 };
 
-module.exports = { sequelize, connectDB };
+module.exports = { connectDB };
