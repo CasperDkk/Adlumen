@@ -1,11 +1,10 @@
-const { authenticatedLndGrpc } = require('ln-service');
+// lnd-config.js
+const { Client } = require('ln-service');
 
-const config = {
-  cert: process.env.LND_CERT_PATH,  // Path to your LND TLS certificate
-  macaroon: process.env.LND_MACAROON_PATH,  // Path to your macaroon
-  socket: process.env.LND_SOCKET 
-};
+const lnd = new Client({
+  socket: process.env.LND_SOCKET || '127.0.0.1:10004',  // The gRPC server address of your Polar node
+  macaroon: process.env.LND_MACAROON || './path_to_macaroon_file',
+  cert: process.env.LND_CERT || './path_to_tls_certificate',
+});
 
-const { lnd } = authenticatedLndGrpc(config);
-
-module.exports = { lnd };
+module.exports = lnd;

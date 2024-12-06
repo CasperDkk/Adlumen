@@ -1,14 +1,17 @@
-const { authenticatedLndGrpc, createInvoice, getInvoice, settleInvoice } = require('ln-service');
+const lnd = require('../config/lnd-config');
+const { createInvoice, getInvoice, settleInvoice, getWalletInfo } = require('ln-service');  // Methods from ln-service
 
-// Lightning Network Node Configuration
-const config = {
-  cert: process.env.LND_CERT_PATH, // Path to TLS cert
-  macaroon: process.env.LND_MACAROON_PATH, // Path to admin macaroon
-  socket: process.env.LND_SOCKET, // LND RPC host
-};
-
-// Connect to LND
-const { lnd } = authenticatedLndGrpc(config);
+// Fetch wallet info to check the connection
+async function getWalletInfo() {
+  try {
+    const walletInfo = await lnd.getWalletInfo();
+    console.log('Connected to Polar Lightning Node', walletInfo);
+    return walletInfo;
+  } catch (error) {
+    console.error('Error connecting to Lightning node:', error);
+    throw new Error('Connection failed');
+  }
+}
 
 // Create an Invoice
 async function createLightningInvoice(amount, description) {
@@ -49,6 +52,7 @@ async function settleLightningInvoice(id) {
 }
 
 module.exports = {
+  getWalletInfo,
   createLightningInvoice,
   checkInvoiceStatus,
   settleLightningInvoice,
